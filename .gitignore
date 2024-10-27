@@ -1,2 +1,2 @@
-# ignore all .txt files
-*.txt
+# Ignore files or folders that do not need to include in Git
+myenv/
