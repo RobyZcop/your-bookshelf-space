@@ -30,12 +30,54 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 @login_required
 def index():
-    return apology("TO DO COGLIONE")
+    if request.method == "GET":
 
+        user_books = db.execute(
+            "SELECT title, author, status FROM books;"
+        )
+
+        books = [{"title": book["title"], "author": book["author"], "status": book["status"]} for book in user_books]
+
+        print(books)
+        return render_template("index.html", books=books)
+
+@app.route("/add_book", methods=["GET", "POST"])
+@login_required
+def add_book():
+    """ User can add a book. """
+
+    if request.method == "POST":
+        
+        # Store input inside variables
+        book_title = request.form.get("book_title")
+        author = request.form.get("author")
+        status = request.form.get("status")
+        
+        # Validate user input
+        if not book_title:
+            return apology("Insert book title!")
+        
+        if not author:
+            return apology("Insert author!")
+        
+        if not status:
+            return apology("insert status")
+        
+        # Insert data into book table
+        db.execute("INSERT INTO books (title, author, status) VALUES (?,?,?)",
+                    book_title, author, status)
+        
+        flash("Book has been added successfully!")
+        return redirect("/")
+        
+       
+    else:
+         return render_template("/add_book.html")
+
+    
 @app.route("/registration", methods=["GET", "POST"])
 def registration():
     """Register user"""

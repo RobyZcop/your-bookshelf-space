@@ -1,1 +1,29 @@
-daje
+{% extends "layout.html" %}
+
+{% block title %}
+    Home page
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-start">Book title</th>
+                <th class="text-end">Author</th>
+                <th class="text-end">Status</th>
+            </tr>
+        </thead>
+    
+
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td class="text-start">{{book.title}}</td>
+                <td class="text-end">{{book.author}}</td>
+                <td class="text-end">{{book.status}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}
