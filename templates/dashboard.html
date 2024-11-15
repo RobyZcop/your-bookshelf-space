@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block main %}
+    <h2>Dashboard</h2>
+    
+    <!-- Summary of books -->
+    <div class="row">
+        <div class="col-md-4">
+            <h5>Total Books</h5>
+            <p>{{ total_books }}</p>
+        </div>
+        
+        <div class="col-md-4">
+            <h5>Books by Status</h5>
+            <ul>
+                <li>To Read: {{ status_count["To Read"] }}</li>
+                <li>Currently Reading: {{ status_count["Currently Reading"] }}</li>
+                <li>Read: {{ status_count["Read"] }}</li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h5>Recent Books</h5>
+            <ul>
+                {% for book in recent_books %}
+                    <li>{{ book.title }} by {{ book.author }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

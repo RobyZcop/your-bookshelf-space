@@ -30,19 +30,20 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 @login_required
 def index():
+    """Show Home page """
+
     if request.method == "GET":
-
+        
+        #Retrive user books
         user_books = db.execute(
-            "SELECT title, author, status FROM books;"
-        )
+                "SELECT title, author, status FROM books;"
+            )
+        
+        return render_template("index.html", user_books=user_books)
 
-        books = [{"title": book["title"], "author": book["author"], "status": book["status"]} for book in user_books]
-
-        print(books)
-        return render_template("index.html", books=books)
 
 @app.route("/add_book", methods=["GET", "POST"])
 @login_required
@@ -76,6 +77,32 @@ def add_book():
        
     else:
          return render_template("/add_book.html")
+
+@app.route("/dashboard", methods=["GET", "POST"])
+@login_required
+def dashboard():
+
+#TODO make visually these data (plotly)
+#TODO adding book reccomantion based on user books collection
+    
+    # Get the user's book from the database
+    user_books = db.execute("SELECT * FROM books")
+
+    # Count books by status
+    status_count = {
+        "To Read": sum(1 for book in user_books if book["status"] == "to_read"),
+        "Currently Reading": sum(1 for book in user_books if book["status"] == "currently_reading"),
+        "Read": sum(1 for book in user_books if book["status"] == "read")
+    }
+
+    # Recent books (limit to 5)
+    recent_books = user_books[-5:][::-1]
+    print(recent_books)
+
+    return render_template("dashboard.html",
+                           total_books=len(user_books),
+                           status_count=status_count,
+                           recent_books=recent_books)
 
     
 @app.route("/registration", methods=["GET", "POST"])
