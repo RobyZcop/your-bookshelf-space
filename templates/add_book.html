@@ -5,34 +5,35 @@
 {% endblock %}
 
 {% block main %}
-    <!-- Flash message alert -->
-     {% with messages = get_flashed_messages() %}
-        {%if messages %}
-        <div id="flash-message" class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ messages[0] }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        {% endif %}
-
-     {% endwith %}
-
-    <!-- Book form -->
-    <form action="add_book" method="post" class="d-flex justify-content-center align-items-center">
-        <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="book_title" placeholder="Title of the book" type="text">
-        </div>
-        <div class="mb-3">
-            <input class="form-control mx-auto w-auto" name="author" placeholder="Author" type="text">
-        </div>
-        <div class="mb-3">
-            <select class="form-control mx-auto w-auto" name="status" placeholder="Author" type="text">
-                <option value="to_read">To read</option>
-                <option value="currently_reading">Currently reading</option>
-                <option value="read">Read</option>
-            </select>
-        </div>
-        <button class="btn btn-primary" type="submit"> Save your book! </button>
+    <h2>Search for a Book</h2>
+    <form method="get" action="/add_book">
+        <input class="form-control mx-auto w-auto" name="q" placeholder="Enter book title" type="text" value="{{ request.args.q }}">
+        <button class="btn btn-primary" type="submit">Search</button>
     </form>
+    
+    {% if results %}
+        <h3>Search Results:</h3>
+        <div class="results">
+            {% for result in results %}
+                <div class="book">
+                    <img src="{{ result.image }}" alt="Book cover">
+                    <h4>{{ result.title }}</h4>
+                    <p>{{ result.author }}</p>
+                    <form method="post" action="/add_book">
+                        <input type="hidden" name="book_title" value="{{ result.title }}">
+                        <input type="hidden" name="author" value="{{ result.author }}">
+                        <select class="form-control mx-auto w-auto" name="status">
+                            <option value="to_read">To read</option>
+                            <option value="currently_reading">Currently reading</option>
+                            <option value="read">Read</option>
+                        </select>
+                        <button class="btn btn-success" type="submit">Add</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
 
     <!-- Auto-hide the flash message after three seconds -->
     <script>
@@ -44,4 +45,3 @@
             }
         }, 3000);
     </script>
-{% endblock %}

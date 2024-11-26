@@ -1,3 +1,9 @@
+###### MAKE IT in a way that when select a book it open a page with specifc details about the book
+### and personal detail the user can add on that page like favourites quotes etc.
+
+# check why when I check arry potter it does not geve e useful answert but random books from random authors
+
+
 # To update requirments.txt with latest packages  :::   pip freeze > requirements.txt
 # citie the usage of CS50x code for thing like caching, sessions, apology etc (refere to the base implemnetation of finance assignment) maybe change the code logic to show my understiandg and modificaiton
 # make from scratch the layout.html page (it is fully copy from cs50x so make it from scratch)
@@ -6,8 +12,12 @@ from datetime import datetime
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
+import requests
 
 from helpers import login_required, apology
+
+# Google books API
+KEY = "AIzaSyDx2n2KoQeViQl3jY0XtTde1BnGPDg5nzg"
 
 # Configure application 
 app = Flask(__name__)
@@ -33,13 +43,26 @@ def after_request(response):
 @app.route("/")
 @login_required
 def index():
-    """Show Home page """
+    """Show Home Page"""
 
     if request.method == "GET":
         
         #Retrive user books
         user_books = db.execute(
-                "SELECT title, author, status FROM books;"
+                """
+                SELECT DISTINCT
+                    b.title,
+                    b.author, 
+                    b.status 
+                FROM 
+                    books AS b
+                INNER JOIN 
+                    users_books AS ub
+                 ON b.id = ub.book_id
+                WHERE
+                    ub.user_id  = ?
+                
+                """, session["user_id"]
             )
         
         return render_template("index.html", user_books=user_books)
@@ -48,7 +71,7 @@ def index():
 @app.route("/add_book", methods=["GET", "POST"])
 @login_required
 def add_book():
-    """ User can add a book. """
+    """ User can search and add a book. """
 
     if request.method == "POST":
         
@@ -58,25 +81,54 @@ def add_book():
         status = request.form.get("status")
         
         # Validate user input
-        if not book_title:
-            return apology("Insert book title!")
+        if not book_title or not author or not status:
+            return apology("All fields are required!")
         
-        if not author:
-            return apology("Insert author!")
+        # Check if book already exists in the database
+        book = db.execute("SELECT * FROM books WHERE title = ? AND author = ?", book_title, author)
+        if not book:
+            
+            # Insert book into table if does not exists
+            book_id = db.execute("INSERT INTO books (title, author, status) VALUES (?, ?, ?)", book_title, author, status)
+            flash("Book has been added successfully!")
         
-        if not status:
-            return apology("insert status")
+        else:
+            book_id = book[0]["id"]
         
-        # Insert data into book table
-        db.execute("INSERT INTO books (title, author, status) VALUES (?,?,?)",
-                    book_title, author, status)
+        # Retrive user session
+        user_session = session["user_id"]
+
+        # Insert book into user_books table
+        try:
+            db.execute("INSERT INTO users_books (user_id, book_id, date_added) VALUES (?, ?, ?)", user_session, book_id, datetime.now())
         
-        flash("Book has been added successfully!")
+        except:
+            return apology("Book already linked to this user.")
+        
         return redirect("/")
-        
-       
+    
     else:
-         return render_template("/add_book.html")
+        # Handle search using Google Books API
+        query = request.args.get("q")
+        results = []
+
+        if query:
+            # Make API request
+
+            api_url = f"https://www.googleapis.com/books/v1/volumes?q={query}&langRestrict=en&maxResults=5&key={KEY}"
+            response = requests.get(api_url).json()
+
+            if "items" in response:
+                for item in response["items"]:
+                    book_info = item["volumeInfo"]
+                    results.append({
+                        "title": book_info.get("title"),
+                        "author": ", ".join(book_info.get("authors", [])),
+                        "image": book_info.get("imageLinks", {}).get("thumbnail", ""),
+                        "id": item.get("id")
+                    })
+
+        return render_template("/add_book.html", results=results)
 
 @app.route("/dashboard", methods=["GET", "POST"])
 @login_required
@@ -86,7 +138,20 @@ def dashboard():
 #TODO adding book reccomantion based on user books collection
     
     # Get the user's book from the database
-    user_books = db.execute("SELECT * FROM books")
+    user_books = db.execute( """
+                SELECT DISTINCT
+                    b.title,
+                    b.author, 
+                    b.status 
+                FROM 
+                    books AS b
+                INNER JOIN 
+                    users_books AS ub
+                 ON b.id = ub.book_id
+                WHERE
+                    ub.user_id  = ?
+                
+                """, session["user_id"])
 
     # Count books by status
     status_count = {
@@ -97,7 +162,6 @@ def dashboard():
 
     # Recent books (limit to 5)
     recent_books = user_books[-5:][::-1]
-    print(recent_books)
 
     return render_template("dashboard.html",
                            total_books=len(user_books),
@@ -175,6 +239,14 @@ def login():
     # User reached route via GET  
     else:
         return render_template("login.html")
-
     
-  
+
+@app.route("/logout")
+def logout():
+    """Log user out"""
+
+    # Forget any user_id
+    session.clear()
+
+    # Redirect user to login form
+    return redirect("/")
