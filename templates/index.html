@@ -18,9 +18,9 @@
         <tbody>
             {% for book in user_books %}
             <tr>
-                <td class="text-start">{{book.title}}</td>
+                <td class="text-start"> <a href="{{ url_for('book_details', book_id=book.id)}}"> {{book.title}}</a></td>
                 <td class="text-end">{{book.author}}</td>
-                <td class="text-end">{{book.status}}</td>
+                <td class="text-end">{{book.status}}</td>boo
             </tr>
             {% endfor %}
         </tbody>

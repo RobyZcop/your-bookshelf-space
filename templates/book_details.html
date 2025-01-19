@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ book.title }} Details
+{% endblock %}
+
+
+{% block main %}
+    <h2>{{book.title}}</h2>
+    <p><strong>Author: </strong>{{book.author}}</p>
+    <div>
+        <img src="{{ additional_details.image }}" alt="book_image">
+    </div>
+
+    <div><p>{{ additional_details.description}}</p></div>
+
+    <h3>Personal notes</h3>
+    <ul>
+        {%for note in notes%}
+            <li>{{note.note}} ---- {{(note.date_added)}}</li>
+        {% endfor %}
+    </ul>
+
+    <form method="POST" autocomplete="off">
+        <div class="form-group">
+        <label for="note">Add a personal note: </label>
+        <textarea name="note" class="form-control" rows="3"> </textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Add Note</button>
+    </form>
+
+    <br>
+    <a href="/"> Back to Home</a>
+
+{% endblock %}

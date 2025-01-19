@@ -55,4 +55,18 @@ if not table_exists("users_books"):
     """)
     print("Created table: users_books")
 
+# Create notes table if does not exist
+if not table_exists("notes"):
+    db.execute("""
+    CREATE TABLE notes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+        user_id INTEGER NOT NULL,
+        book_id INTEGER NOT NULL,
+        note TEXT,
+        date_added TEXT DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+        FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
+    );
+    """)
+    print("Created table: users_books")
 

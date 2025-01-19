@@ -6,7 +6,7 @@
 
 {% block main %}
     <h2>Search for a Book</h2>
-    <form method="get" action="/add_book">
+    <form method="get" action="/add_book" autocomplete="off">
         <input class="form-control mx-auto w-auto" name="q" placeholder="Enter book title" type="text" value="{{ request.args.q }}">
         <button class="btn btn-primary" type="submit">Search</button>
     </form>

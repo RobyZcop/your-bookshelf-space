@@ -2,8 +2,6 @@
 ###### MAKE IT in a way that when select a book it open a page with specifc details about the book
 ### and personal detail the user can add on that page like favourites quotes etc.
 
-# check why when I check arry potter it does not geve e useful answert but random books from random authors
-
 
 # To update requirments.txt with latest packages  :::   pip freeze > requirements.txt
 # citie the usage of CS50x code for thing like caching, sessions, apology etc (refere to the base implemnetation of finance assignment) maybe change the code logic to show my understiandg and modificaiton
@@ -15,10 +13,9 @@ from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 import requests
 
-from helpers import login_required, apology
+from helpers import login_required, apology, fetch_book_details
 
-# Google books API
-KEY = "AIzaSyDx2n2KoQeViQl3jY0XtTde1BnGPDg5nzg"
+
 
 # Configure application 
 app = Flask(__name__)
@@ -52,6 +49,7 @@ def index():
         user_books = db.execute(
                 """
                 SELECT DISTINCT
+                    b.id,
                     b.title,
                     b.author, 
                     b.status 
@@ -110,26 +108,50 @@ def add_book():
     
     else:
         # Handle search using Google Books API
-        query = request.args.get("q")
-        results = []
-
-        if query:
-            # Make API request
-
-            api_url = f"https://www.googleapis.com/books/v1/volumes?q={query}&langRestrict=en&maxResults=5&key={KEY}"
-            response = requests.get(api_url).json()
-
-            if "items" in response:
-                for item in response["items"]:
-                    book_info = item["volumeInfo"]
-                    results.append({
-                        "title": book_info.get("title"),
-                        "author": ", ".join(book_info.get("authors", [])),
-                        "image": book_info.get("imageLinks", {}).get("thumbnail", ""),
-                        "id": item.get("id")
-                    })
-
+        query = request.args.get("q", "").strip()
+        # fetch book detials
+        results = fetch_book_details(query)
+        
         return render_template("/add_book.html", results=results)
+    
+
+@app.route("/book_details/<int:book_id>", methods=["GET", "POST"])
+@login_required
+def book_details(book_id):
+    """Show details of a specif book and allow user to add personal notes."""
+    
+    # Retrive user session
+    user_session = session["user_id"]
+
+    if request.method == "POST":
+
+        # Adding of personal notes
+
+
+        # Retrive note
+        note = request.form.get("note")
+
+        # Insert in table note
+        db.execute("INSERT INTO notes (user_id, book_id, note, date_added) VALUES (?, ?, ?, ?)", user_session, book_id, note, datetime.now())
+
+        return redirect (f"/book_details/{book_id}")
+    else:
+    
+        # Fetch book details from the database
+        book = db.execute("SELECT * FROM books WHERE id = ?", book_id)
+        notes = db.execute("SELECT * FROM notes WHERE user_id = ? and book_id = ?", user_session, book_id)
+    
+        book = book[0]
+
+        # Fetch additional information of books from the API
+        query = f"{book['title']} {book['author']}"
+        additional_details = fetch_book_details(query)
+        additional_details = additional_details[0]
+        
+        
+
+        return render_template("book_details.html", book=book, additional_details=additional_details, notes=notes)
+
 
 @app.route("/dashboard", methods=["GET", "POST"])
 @login_required
@@ -153,6 +175,8 @@ def dashboard():
                     ub.user_id  = ?
                 
                 """, session["user_id"])
+    
+    print(user_books)
 
     # Count books by status
     status_count = {
@@ -169,7 +193,10 @@ def dashboard():
                            status_count=status_count,
                            recent_books=recent_books)
 
-    
+
+############################################################################################## Registraion, loign, log out ############################################################################
+
+
 @app.route("/registration", methods=["GET", "POST"])
 def registration():
     """Register user"""
@@ -240,7 +267,7 @@ def login():
     # User reached route via GET  
     else:
         return render_template("login.html")
-    
+
 
 @app.route("/logout")
 def logout():
