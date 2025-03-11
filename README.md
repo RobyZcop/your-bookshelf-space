@@ -1,5 +1,6 @@
 # Your BookshelfSpace
-### Video Demo:  [Video demo](https://www.youtube.com/watch?v=TtKnFycGcK8)
+### Video Demo:  [Video demo](https://www.youtube.com/watch?v=TtKnFycGcK8) <a href="https://www.youtube.com/watch?v=TtKnFycGcK8" target="_blank">Click here to watch the video</a>
+
 ### Description of the project
 #### Introduction:
 I have developed a web application that allows users to create a personal bookshelf where they can add books they want to read, are currently reading, or plan to read in the future. The application is designed to be minimal, with the goal of not overwhelming the user and focusing on core functionalities.
