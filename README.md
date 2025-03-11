@@ -69,7 +69,4 @@ The project uses a relational database with the following tables:
 ```
 
 ## 🎥 Video Demo  
-[Click here to watch the demo](https://www.youtube.com/watch?v=TtKnFycGcK8)  
-
-✅ **This project was developed as my final project for Harvard’s CS50x (Introduction to Computer Science).**  
-
+[Click here to watch the demo](https://www.youtube.com/watch?v=TtKnFycGcK8) 
