@@ -1,4 +1,6 @@
-# 📚 Your BookshelfSpace  
+# 📚 Your BookshelfSpace 
+<sub>✅ This project was developed as my final project for Harvard’s CS50x (Introduction to Computer Science).</sub>
+
 
 ## 📌 Project Overview  
 **Your BookshelfSpace** is a minimalistic web application that allows users to manage their personal bookshelf. Users can add books they want to read, are currently reading, or have already read. The goal of this project is to provide a simple and distraction-free experience while offering useful features to track reading progress.  
