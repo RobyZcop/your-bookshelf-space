@@ -55,7 +55,7 @@ The project uses a relational database with the following tables:
 
 ---
 ## 🏗️ Project structure
-📂 book-tracker
+📂 your-bookshelf-space
 │-- 📄 app.py                # Main application logic
 │-- 📄 helpers.py            # Utility functions (API calls, daily quotes, etc.)
 │-- 📄 db_structure_setup.py  # Database schema setup script
