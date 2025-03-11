@@ -56,6 +56,7 @@ The project uses a relational database with the following tables:
 ---
 
 ## 🏗️ Project structure
+```
 📂 your-bookshelf-space
 │-- 📄 app.py                # Main application logic
 │-- 📄 helpers.py            # Utility functions (API calls, daily quotes, etc.)
@@ -63,7 +64,7 @@ The project uses a relational database with the following tables:
 │-- 📂 templates             # HTML templates for the frontend
 │-- 📂 static                # CSS and static assets
 │-- 📄 README.md             # Project documentation
-
+```
 
 ## 🎥 Video Demo  
 [Click here to watch the demo](https://www.youtube.com/watch?v=TtKnFycGcK8)  
