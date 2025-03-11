@@ -1,6 +1,3 @@
-# Your BookshelfSpace
-
-
 # 📚 Your BookshelfSpace  
 
 ## 📌 Project Overview  
@@ -57,6 +54,15 @@ The project uses a relational database with the following tables:
 | `users_book` | Tracks which books belong to which user. |
 
 ---
+## 🏗️ Project structure
+📂 book-tracker
+│-- 📄 app.py                # Main application logic
+│-- 📄 helpers.py            # Utility functions (API calls, daily quotes, etc.)
+│-- 📄 db_structure_setup.py  # Database schema setup script
+│-- 📂 templates             # HTML templates for the frontend
+│-- 📂 static                # CSS and static assets
+│-- 📄 README.md             # Project documentation
+
 
 ## 🎥 Video Demo  
 [![Watch the video](https://img.youtube.com/vi/TtKnFycGcK8/0.jpg)](https://www.youtube.com/watch?v=TtKnFycGcK8)  
