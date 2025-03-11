@@ -31,7 +31,7 @@ This project is built using the following technologies:
 ✔️ A **dashboard** provides insights into the user’s reading habits, displaying:  
    - 📚 **Total books in the library**  
    - 🔍 **Most recently added book**  
-   - 📊 **A pie chart** showing the distribution of books by status (**To Read, Currently Reading, Read**)  
+   - 📊 **A bar chart** showing the distribution of books by status (**To Read, Currently Reading, Read**)  
    - 📖 **A bar chart** displaying the number of books per genre  
 ✔️ The **Pandas** library is used for data processing and visualization.  
 
@@ -54,6 +54,7 @@ The project uses a relational database with the following tables:
 | `users_book` | Tracks which books belong to which user. |
 
 ---
+
 ## 🏗️ Project structure
 📂 your-bookshelf-space
 │-- 📄 app.py                # Main application logic
@@ -65,8 +66,7 @@ The project uses a relational database with the following tables:
 
 
 ## 🎥 Video Demo  
-[![Watch the video](https://img.youtube.com/vi/TtKnFycGcK8/0.jpg)](https://www.youtube.com/watch?v=TtKnFycGcK8)  
-
+[Click here to watch the demo](https://www.youtube.com/watch?v=TtKnFycGcK8)  
 
 ✅ **This project was developed as my final project for Harvard’s CS50x (Introduction to Computer Science).**  
 
