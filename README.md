@@ -1,4 +1,5 @@
-# 📚 Your BookshelfSpace <sub>✅ This project was developed as my final project for Harvard’s CS50x (Introduction to Computer Science).</sub>
+# 📚 Your BookshelfSpace
+<sub>✅ This project was developed as my final project for Harvard’s CS50x (Introduction to Computer Science).</sub>
 
 
 ## 📌 Project Overview  
