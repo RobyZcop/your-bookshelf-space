@@ -1,0 +1,133 @@
+
+:root {
+    --bs-font-sans-serif: "Inter", system-ui, sans-serif !important;
+}
+
+body {
+    background-color: #FBFBFB;
+}
+
+nav {
+    background-color:#FBFBFB;
+    font-family: "Inter", system-ui, sans-serif !important;
+}
+
+.custom-border {
+    border-bottom: 1px solid #C4D9FF !important;
+}
+
+section {
+    padding: 60px 0;
+}
+
+.card-recc {
+    max-width: 350px;
+}
+
+.card-recc img {
+    height: 200px; 
+    object-fit: cover; 
+}
+
+.card-recc .card-body {
+    padding: 50px; 
+}
+
+.card-recc .card-title {
+    font-size: 16px; 
+}
+
+.card-recc .card-subtitle {
+    font-size: 14px; 
+}
+
+.card-recc.btn {
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+
+.btn {
+        font-family: "Inter", system-ui, sans-serif !important;
+        background-color: #9B6DFF;
+        border-color: #C4D9FF;
+}
+
+.btn:hover {
+    font-family: "Inter", system-ui, sans-serif !important;
+    background-color: #7140F5;
+    border-color: #8A5AFF; 
+}
+
+.custom-brand {
+    color: #9B6DFF;
+}
+
+
+.table, .table tbody, .table tr, .table td, .table th {
+    background-color: #FBFBFB !important;
+    padding: 20px !important;
+    border: 1px solid #C4D9FF !important;
+}
+
+.table.table-hover tbody tr:hover td {
+    background-color: #E8F9FF !important;
+}
+
+.table thead th {
+   color: #9B6DFF !important;
+}
+
+.table {
+    font-family: "Inter", system-ui, sans-serif !important;
+    font-size: 16px; 
+    font-weight: 500;
+    color: #333 !important;
+}
+
+.table a {
+    color: #0056b3 !important; /* Bootstrap default blue */
+    font-weight: 700;
+}
+
+.table a:hover {
+    color: #0056b3 !important;
+}
+
+.custom-border-column {
+    border: 1px solid #C4D9FF; 
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.form-control {
+    width: 100% !important;
+    height: 50px; 
+    font-size: 1.1rem;
+}
+
+.form-control:focus, 
+.form-control:hover {
+    border-color: #7A59F5 !important;
+    box-shadow: 0 0 5px rgba(122, 89, 245, 0.5);
+}
+
+.button-form {
+    width: 100% !important;
+    height: 50px; 
+    font-size: 1.1rem;
+}
+
+
+.pagination .page-item .page-link {
+    background-color: #E8F9FF; 
+    color: #7A59F5; 
+    border-color: #C4D9FF;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #7A59F5; 
+    color: white;
+    border-color: #C4D9FF;
+}
+

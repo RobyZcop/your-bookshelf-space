@@ -1,35 +1,86 @@
-{% extends "layout.html" %}
+    {% extends "layout.html" %}
 
-{% block title %}
-    Dashboard
-{% endblock %}
+    {% block title %}
+        Dashboard
+    {% endblock %}
 
-{% block main %}
-    <h2>Dashboard</h2>
-    
-    <!-- Summary of books -->
-    <div class="row">
-        <div class="col-md-4">
-            <h5>Total Books</h5>
-            <p>{{ total_books }}</p>
+    {% block main %}
+
+    <section class="my-5">
+        <div class="container-lg">
+            <div class="row justify-content-center">
+                <div class="display-5 text-muted"> Have a look about your books insights </div>
+            </div>
+            
+                <!-- Summary of books -->
+                <div class="row justify-content-center mt-5">
+                    
+                    <!-- total books -->
+                    <div class="col-md-6 text-center text-md-start">
+                        <div class="card text-center shadow-sm border-0">
+                            <div class="card-body py-4">
+                                <div class=" display-6 text-muted">Total Books</div> 
+                                <div class=" custom-brand display-3 fw-bold ">{{ total_books }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Recent books -->
+                    <div class="col-md-6 text-center text-md-start">
+                        <h5>Recent Books</h5>
+                        <table class="table table-borderless table-hover custom-border">
+                            <thead>
+                                <th class="text-start">Title</th>
+                                <th class="text-end"> Author</th>
+                            </thead>
+                            <tbody>
+                                {% for book in recent_books %}
+                                <tr>
+                                    <td class="text-end">{{ book.title }}</td>
+                                    <td class="text-end">{{ book.author }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-md-6 text-center text-md-start">
+                            {{status_chart | safe }}
+
+                    </div>
+                    
+                    <div class="col-md-6 text-center text-md-start">
+                        {{genre_chart | safe }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reccomandation books -->
+                    <div class="row my-5 justify-content-center mt-5">
+                        <div class="text-center">
+                            <div class="display-5 text-muted"> Books that you may like!</div>
+                        </div>
+                        {% for book in reccomended_books %}
+                            {% if book and book.image and book.title %}
+                                <div class="col-10 col-md-5 col-lg-3 mt-5">
+                                    <div class="card card-recc border-0 h-auto">
+                                        <a href="{{ url_for('recommendation_book_detail', book_id=book.id)}}" class="text-decoration-none">
+                                            <img src="{{ book.image }}" class="card-img-top" alt="{{ book.title }}">
+                                            <div class="card-body text-center py-4">
+                                                <h4 class="card-title">{{ book.title }}</h4>
+                                                <p class="lead card-subtitle text-muted">{{ book.author }}</p>
+                                                <button class="btn btn-secondary btn-lg mt-3">Details</button>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
         </div>
+    </section>
         
-        <div class="col-md-4">
-            <h5>Books by Status</h5>
-            <ul>
-                <li>To Read: {{ status_count["To Read"] }}</li>
-                <li>Currently Reading: {{ status_count["Currently Reading"] }}</li>
-                <li>Read: {{ status_count["Read"] }}</li>
-            </ul>
-        </div>
-        <div class="col-md-4">
-            <h5>Recent Books</h5>
-            <ul>
-                {% for book in recent_books %}
-                    <li>{{ book.title }} by {{ book.author }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
 
-{% endblock %}
+    {% endblock %}

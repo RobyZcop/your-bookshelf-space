@@ -1,5 +1,6 @@
 # Ignore files or folders that do not need to include in Git
-myenv/
 books.db
 __pycache__/
-flask_session/
+flask_session
+venv/
+

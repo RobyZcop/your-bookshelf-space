@@ -5,13 +5,28 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/login" method="post">
-        <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text">
+<section>
+    <div class="class container-lg">
+        <div class="row justify-content-center gy-4 py-5">
+            <div class="col-md-6 text-center text-md-start py-5">
+                <div class="display-6">Access your bookshelf</div>
+                <p class="lead text-muted">Not register yet? <a class="custom-brand" href="/registration"><b>Sign-up</b></a></p>
+            </div>
+            <div class="col-md-6 text-center text-md-start py-5 custom-border-column">
+                <form action="/login" method="post">
+                    <div class="mb-3">
+                        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text">
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary button-form" type="submit">Log in</button>
+                    </div>
+                </form>
+            </div>   
         </div>
-        <div class="mb-3">
-            <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
-        </div>
-        <button class="btn btn-primary" type="submit">Log in</button>
-    </form>
+    </div>
+</section>
+    
 {% endblock %}

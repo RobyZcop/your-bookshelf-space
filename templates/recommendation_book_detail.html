@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ book.volumeInfo.title }} Reccomendation Details
+{% endblock %}
+
+
+{% block main %}
+
+    <section>
+        <div class="container-lg">
+            <div class="row justify-content-center">
+                <div class="col-md-5 tex-center text-md-start">
+                    <h1>
+                        <div class="display-2">{{book.volumeInfo.title}}</div>
+                        <div class="display-5 text-muted">{{book.volumeInfo.authors | join(', ')}}</div>
+                    </h1>
+                    <div>
+                        <img src="{{ book.volumeInfo.imageLinks.thumbnail}}" alt="book_image">
+                    </div>
+                </div>
+                <div class="col-md-5 text-start">
+                    <p class="lead my-4 text-muted">{{ book.volumeInfo.description}}</p>
+                    <form method="post" action="/add_book" autocomplete="off">
+                        <input type="hidden" name="book_title" value="{{ book.volumeInfo.title }}">
+                        <input type="hidden" name="author" value="{{ book.volumeInfo.authors | join(', ') }}">
+                        <input type="hidden" name="status" value="to_read">
+                        <input type="hidden" name="genres" value="{{ book.volumeInfo.categories | join(', ')}}">
+                        <button class="btn btn-secondary btn-lg" type="submit">Add Book</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br>
+        <a href="/"> Back to Home</a>
+    </section>
+{% endblock %}

@@ -6,30 +6,80 @@
 
 
 {% block main %}
-    <h2>{{book.title}}</h2>
-    <p><strong>Author: </strong>{{book.author}}</p>
-    <div>
-        <img src="{{ additional_details.image }}" alt="book_image">
-    </div>
 
-    <div><p>{{ additional_details.description}}</p></div>
+    <section>
+        <div class="container-lg">
+            <div class="row justify-content-center">
+                <div class="col-md-5 tex-center text-md-start">
+                    <h1>
+                        <div class="display-2">{{book.title}}</div>
+                        <div class="display-5 text-muted">{{book.author}}</div>
+                    </h1>
+                    <div>
+                        <img src="{{  additional_details.image }}" alt="book_image">
+                    </div>
+                </div>
+                <div class="col-md-5 text-start">
+                    <p class="text my-4 text-muted">{{ additional_details.description }}</p>
+                    <form method="POST" autocomplete="off">
+                        <input type="hidden" name="form_type" value="remove_book">
+                        <button class="btn btn-secondary btn-lg" type="submit" name="remove_book">Remove book! </button>
+                    </form>
+                </div>
+            </div>
 
-    <h3>Personal notes</h3>
-    <ul>
-        {%for note in notes%}
-            <li>{{note.note}} ---- {{(note.date_added)}}</li>
-        {% endfor %}
-    </ul>
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-4 text-center text-md-start">
+                    <form method="POST" autocomplete="off">
+                        <input type="hidden" name="form_type" value="add_note">
+                        <div class="form-group">
+                        <label class="display-6" for="note">Add a personal note </label>
+                        <textarea name="note" class="form-control" rows="7" required> </textarea>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Add Note</button>
+                    </form>
+                </div>
+                
+                <div class="col-md-8 text-center text-md-start"> 
+                    <table id="myTable" class="table table-borderless table-hover custom-border">
+                        <thead>
+                            <tr>
+                                <th class="text-start">Note</th>
+                                <th class="text-end">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for note in notes %}
+                            <tr>
+                                <td class="text-end">{{note.note}}</td>
+                                <td class="text-end">{{note.date_added.strftime('%d-%m-%Y  %H:%M')}}</td>
+                                <td class="text-start"> 
+                                    <form method="POST" autocomplete="off">
+                                    <input type="hidden" name="form_type" value="remove_note">
+                                    <input type="hidden" name="note_id" value="{{ note.id }}">
+                                    <button class="btn btn-secondary btn-sm" type="submit" name="remove_note"> Remove </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-    <form method="POST" autocomplete="off">
-        <div class="form-group">
-        <label for="note">Add a personal note: </label>
-        <textarea name="note" class="form-control" rows="3"> </textarea>
         </div>
-        <button class="btn btn-primary" type="submit">Add Note</button>
-    </form>
+    </section>
 
-    <br>
-    <a href="/"> Back to Home</a>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable({
+                "pageLength": 8,
+                "order": [[1, "desc"]]
+            });
+        });
+</script>
+   
 {% endblock %}

@@ -68,5 +68,17 @@ if not table_exists("notes"):
         FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
     );
     """)
-    print("Created table: users_books")
+    print("Created table: notes")
+
+
+# Create quote table if does not exist
+if not table_exists("quotes"):
+    db.execute("""
+    CREATE TABLE quotes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+        date_added TEXT DEFAULT CURRENT_TIMESTAMP,
+        quote TEXT
+    );
+    """)
+    print("Created table: quotes")
 

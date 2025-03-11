@@ -5,16 +5,50 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/registration" method="post">
-        <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text">
+<section>
+    <div class="class container-lg">
+        <div class="row justify-content-center gy-4 py-5">
+            <div class="col-md-6 text-center text-md-start py-5">
+                <div class="display-6">Your  <small class="text-body-secondary">personal reading experience</small></div>
+                <p class="lead text-muted"> All your books information in one place </p>
+            </div>
+            <div class="col-md-6 text-center text-md-start py-5 ">
+                <form class="custom-border-column" action="/registration" method="post">
+                    <div class="mb-3">
+                        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text">
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control mx-auto w-auto" name="confirmation" placeholder="Password (again)" type="password">
+                    </div>
+                    <p class="lead text-muted">Already have an account? <a class="custom-brand" href="/login"><b>Log in</b></a></p>
+                    <button class="btn btn-primary button-form" type="submit">Sing up</button>
+                </form>
+                <div class="py-4">
+                    <figure>
+                        <blockquote class="blockquote">
+                            <p class="lead">{{ quote.quote }}</p>
+                        </blockquote>
+                        <figcaption class="blockquote-footer">
+                            <cite title="Source Title">{{ quote.author }}</cite>
+                        </figcaption>
+                    </figure>
+                    <p class="small text-muted">Inspirational quotes provided by <a class="custom-brand" href="https://zenquotes.io/" target="_blank">ZenQuotes API</a>
+                    </p>
+                </div>
+                
+
+            </div>   
         </div>
-        <div class="mb-3">
-            <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
-        </div>
-        <div class="mb-3">
-            <input class="form-control mx-auto w-auto" name="confirmation" placeholder="Password (again)" type="password">
-        </div>
-        <button class="btn btn-primary" type="submit">Sing up</button>
-    </form>
+    </div>
+</section>
+
+
+
+
+
+
+    
 {% endblock %}

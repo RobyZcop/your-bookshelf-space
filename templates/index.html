@@ -5,25 +5,59 @@
 {% endblock %}
 
 {% block main %}
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th class="text-start">Book title</th>
-                <th class="text-end">Author</th>
-                <th class="text-end">Status</th>
-            </tr>
-        </thead>
-    
 
-        <tbody>
-            {% for book in user_books %}
-            <tr>
-                <td class="text-start"> <a href="{{ url_for('book_details', book_id=book.id)}}"> {{book.title}}</a></td>
-                <td class="text-end">{{book.author}}</td>
-                <td class="text-end">{{book.status}}</td>boo
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<section>
+    <div class="container-lg">
+        <div class="row justify-content-center">
+            <div class=" col-md-4 text-center text-md-start">
+                    <div class="display-5"> 
+                        <small class="text-body-secondary">Hello👋</small>, {{ username.username | capitalize }}
+                    </div>
+                    <div class="my-2"> 
+                        <a href="/add_book" class="btn btn-secondary btn-lg"> Search for a book <i class="fas fa-search"></i></a>
+                    </div>
+            </div>
+            <div class="col-md-8 text-center text-md-start">
+
+                <div class="display-6 text-center py-4"> Your bookshelf </div>
+
+                <table id="myTable" class="table table-borderless table-hover custom-border">
+                    <thead>
+                        <tr>
+                            <th class="text-start">Book title</th>
+                            <th class="text-end">Author</th>
+                             <th class="text-end">Status</th> 
+                            <th class="text-end">Added date</th>
+                        </tr>
+                    </thead>
+                
+        
+                    <tbody>
+                        {% for book in user_books %}
+                        <tr>
+                            <td class="text-start"> <a href="{{ url_for('book_details', book_id=book.id)}}"> {{book.title}}</a></td>
+                            <td class="text-end">{{book.author}}</td>
+                            <td class="text-end">{{book.status}}</td> 
+                            <td class="text-end">{{book.date_added.strftime('%d-%m-%Y')}}</td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div> 
+        </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable({
+            "pageLength": 5
+        });
+    });
+</script>
     
 {% endblock %}
