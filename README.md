@@ -1,5 +1,5 @@
 # Your BookshelfSpace
-### Video Demo: [Click here to watch the video](https://www.example.com](https://www.youtube.com/watch?v=TtKnFycGcK8)
+### Video Demo: [Click here to watch the video](https://www.youtube.com/watch?v=TtKnFycGcK8)
 
 
 ### Description of the project
