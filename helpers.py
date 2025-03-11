@@ -14,7 +14,7 @@ cached_quote = {"quote":None, "author":None, "last_fetched": None}
 db = SQL("sqlite:///books.db")
 
 # Google books API
-KEY = "AIzaSyDx2n2KoQeViQl3jY0XtTde1BnGPDg5nzg"
+KEY = "YOUR_KEY"
 
 
 def fetch_book_details(query):
