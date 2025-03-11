@@ -3,7 +3,10 @@
 
 
 ## 📌 Project Overview  
-**Your BookshelfSpace** is a minimalistic web application that allows users to manage their personal bookshelf. Users can add books they want to read, are currently reading, or have already read. The goal of this project is to provide a simple and distraction-free experience while offering useful features to track reading progress.  
+**Your BookshelfSpace** is a minimalistic web application that allows users to manage their personal bookshelf. Users can add books they want to read, are currently reading, or have already read. The goal of this project is to provide a simple and distraction-free experience while offering useful features to track reading progress.
+
+## 🎥 Video Demo  
+[Click here to watch the demo](https://www.youtube.com/watch?v=TtKnFycGcK8) 
 
 ## 🛠 Technologies Used  
 This project is built using the following technologies:  
@@ -69,6 +72,3 @@ The project uses a relational database with the following tables:
 │-- 📂 static                # CSS and static assets
 │-- 📄 README.md             # Project documentation
 ```
-
-## 🎥 Video Demo  
-[Click here to watch the demo](https://www.youtube.com/watch?v=TtKnFycGcK8) 
