@@ -15,7 +15,8 @@ This project is built using the following technologies:
 ## 🚀 Features  
 
 ### 📖 Book Management  
-✔️ Search for books using a **search bar** powered by the **Google Books API**. <sub> To use it, create an API key from [Google Cloud Console](https://console.cloud.google.com/) and replace `"YOUR_API_KEY_HERE"` in the code. .</sub>
+✔️ Search for books using a **search bar** powered by the **Google Books API**. 
+(<sub> To use it, create an API key from [Google Cloud Console](https://console.cloud.google.com/) and replace `"YOUR_API_KEY_HERE"` in the code. .</sub>)
 
 ✔️ Add books to your personal bookshelf, categorizing them as:  
    - 📍 **To Read**  
