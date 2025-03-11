@@ -10,7 +10,7 @@ This project is built using the following technologies:
 - **Python** (Backend)  
 - **Flask** (Web framework)  
 - **SQL** (Database management)  
-- **HTML, CSS, and JavaScript** (Frontend)  
+- **HTML, CSS, JavaScript and Bootstrap** (Frontend)  
 
 ## 🚀 Features  
 
