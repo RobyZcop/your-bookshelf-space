@@ -13,7 +13,8 @@ This project is built using the following technologies:
 - **Python** (Backend)  
 - **Flask** (Web framework)  
 - **SQL** (Database management)  
-- **HTML, CSS, JavaScript and Bootstrap** (Frontend)  
+- **HTML, CSS, JavaScript and Bootstrap** (Frontend)
+- ** Jinja (Template Engine)
 
 ## 🚀 Features  
 
