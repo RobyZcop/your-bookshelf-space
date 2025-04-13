@@ -25,12 +25,14 @@ This project is built using the following technologies:
 ✔️ Add books to your personal bookshelf, categorizing them as:  
    - 📍 **To Read**  
    - 📖 **Currently Reading**  
-   - ✅ **Read**  
+   - ✅ **Read**
+
 ✔️ Books are stored in a table on the home page, displaying:  
    - **Title**  
    - **Author**  
    - **Status**  
-   - **Date Added**  
+   - **Date Added**
+
 ✔️ Click on a book title to view **detailed information**, where users can:  
    - 📝 **Add and remove personal notes** about the book.  
    - ❌ **Remove books** from the bookshelf.  
