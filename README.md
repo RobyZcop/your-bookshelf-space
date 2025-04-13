@@ -42,7 +42,8 @@ This project is built using the following technologies:
    - 📚 **Total books in the library**  
    - 🔍 **Most recently added book**  
    - 📊 **A bar chart** showing the distribution of books by status (**To Read, Currently Reading, Read**)  
-   - 📖 **A bar chart** displaying the number of books per genre  
+   - 📖 **A bar chart** displaying the number of books per genre
+     
 ✔️ The **Pandas** library is used for data processing and visualization.  
 
 ### 🤖 Book Recommendations  
